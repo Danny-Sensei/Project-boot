@@ -18,7 +18,7 @@ body{
 
     background:#ffffff;
 
-    color:#222;
+    color:#222222;
 
     overflow-x:hidden;
 
@@ -37,7 +37,7 @@ body{
 
     --yellow:#E7B52D;
 
-    --brown:#6A4A0A;
+    --black:#111111;
 
     --lightGold:#FFF8E8;
 
@@ -97,7 +97,7 @@ section{
 
     font-size:2.5rem;
 
-    color:var(--brown);
+    color:var(--black);
 
     position:relative;
 
@@ -117,7 +117,8 @@ section{
     to right,
     var(--gold),
     var(--yellow),
-    var(--brown)
+    var(--black),
+    var(--white),
     );
 
     display:block;
@@ -166,7 +167,7 @@ header{
 
 .logo h2{
 
-    color:var(--brown);
+    color:var(--black);
 
     font-size:2rem;
 
@@ -194,7 +195,7 @@ nav ul{
 
 nav ul li a{
 
-    color:var(--brown);
+    color:var(--black);
 
     font-weight:600;
 
@@ -410,13 +411,13 @@ nav ul li a:hover::after{
 
 .primary{
 
-    background:var(--brown);
+    background:var(--white);
 
-    color:#fff;
+    color:black;
 
     padding:14px 35px;
 
-    border:none;
+    border:2px solid var(--gold);
 
     border-radius:30px;
 
@@ -434,9 +435,9 @@ nav ul li a:hover::after{
 
 .secondary{
 
-    background:transparent;
+    background:var(--white);
 
-    color:var(--brown);
+    color:black;
 
     border:2px solid var(--gold);
 
@@ -453,8 +454,6 @@ nav ul li a:hover::after{
 .secondary:hover{
 
     background:var(--gold);
-
-    color:#fff;
 
 }
 
@@ -633,7 +632,7 @@ nav ul li a:hover::after{
 
     background:#ffffff;
 
-    border:2px solid var(--gold);
+    border:2px solid #D9A520;
 
     border-radius:15px;
 
@@ -649,7 +648,9 @@ nav ul li a:hover::after{
 
     transform:translateY(-10px);
 
-    background:var(--lightGold);
+    background:#FFF9E8;
+
+    border-color:#111111;
 
     box-shadow:0 10px 25px rgba(0,0,0,.12);
 
@@ -696,8 +697,9 @@ nav ul li a:hover::after{
 }
 
 .feature{
+    background:#FFFFFF; 
 
-    border:2px solid var(--yellow);
+    border:2px solid #F4D03F;
 
     border-radius:15px;
 
@@ -711,7 +713,7 @@ nav ul li a:hover::after{
 
 .feature:hover{
 
-    background:var(--lightGold);
+     background:#FFF8DC;
 
     transform:translateY(-8px);
 
@@ -759,7 +761,9 @@ nav ul li a:hover::after{
 
 .detail-card{
 
-    border:2px solid var(--gold);
+    background:#ffffff;          
+
+    border:2px solid #D9A520;
 
     border-radius:15px;
 
@@ -773,7 +777,7 @@ nav ul li a:hover::after{
 
 .detail-card:hover{
 
-    background:var(--lightGold);
+    border-color:#111111;
 
     transform:translateY(-8px);
 
@@ -893,7 +897,7 @@ nav ul li a:hover::after{
 
 .register-box h2{
 
-    color:var(--brown);
+    color:var(--black);
 
     font-size:2.5rem;
 
@@ -915,9 +919,9 @@ nav ul li a:hover::after{
 
 .register-box button{
 
-    background:var(--brown);
+    background:#D9A520;
 
-    color:#fff;
+    color:#111111;
 
     padding:15px 40px;
 
@@ -935,7 +939,7 @@ nav ul li a:hover::after{
 
 .register-box button:hover{
 
-    background:var(--gold);
+     background: #D9A520
 
 }
 
@@ -985,7 +989,7 @@ nav ul li a:hover::after{
 
 .contact-grid h3{
 
-    color:var(--brown);
+    color:var(--black);
 
     margin-bottom:15px;
 
@@ -1003,9 +1007,11 @@ nav ul li a:hover::after{
 
 footer{
 
-    background:var(--brown);
+    background:#111111;
 
-    color:#ffffff;
+    color:#FFFFFF;
+
+    border-top:4px solid #D9A520;
 
     text-align:center;
 
@@ -1210,5 +1216,184 @@ button{
 
         opacity:0;
     }
+
+}
+
+/* =======================================
+   REGISTRATION FORM
+======================================= */
+.register-container{
+
+    max-width:1100px;
+
+    margin:auto;
+
+}
+
+.register-form{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:25px;
+
+}
+
+.input-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.input-group label{
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+    color:#222;
+
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea{
+
+    padding:15px;
+
+    border:2px solid transparent;
+
+    border-image:linear-gradient(
+    to right,
+    #F3C431,
+    #000,
+    #fff,
+    #F3C431
+    );
+
+    border-image-slice:1;
+
+    outline:none;
+
+    background:#fff;
+
+    font-size:16px;
+
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus{
+
+    box-shadow:0 0 8px rgba(243,196,49,.4);
+
+}
+
+.full-width{
+
+    grid-column:1 / span 2;
+
+}
+
+.register-form button{
+
+    background:#111;
+
+    color:white;
+
+    border:none;
+
+    padding:16px;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    border-radius:8px;
+
+    transition:.3s;
+
+}
+
+.register-form button:hover{
+
+    background:#F3C431;
+
+    color:black;
+
+}
+
+/* =======================================
+   DIVIDER
+======================================= */
+
+.divider{
+
+    width:92%;
+
+    height:5px;
+
+    margin:80px auto;
+
+    background:linear-gradient(
+    90deg,
+        #D9A520 0%,
+        #F4D03F 20%,
+        #111111 40%,
+        #FFFFFF 55%,
+        #111111 70%,
+        #D9A520 100%
+    );
+
+    border-radius:20px;
+
+}
+
+/* =======================================
+   MOBILE RESPONSIVE
+======================================= */
+
+@media(max-width:900px){
+
+.register-form{
+
+grid-template-columns:1fr;
+
+}
+
+.full-width{
+
+grid-column:1;
+
+}
+
+}
+
+@media(max-width:600px){
+
+.register-form{
+
+gap:18px;
+
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea{
+
+font-size:15px;
+
+padding:12px;
+
+}
+
+.register-form button{
+
+font-size:16px;
+
+}
 
 }
