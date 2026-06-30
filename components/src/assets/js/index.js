@@ -258,7 +258,7 @@ window.onbeforeunload = function(){
 
 const revealElements = document.querySelectorAll(
 
-    ".section-heading, .about-image, .about-content, .why-card, .course-card, .stat-card, .detail-card, .contact-card, .registration-form"
+    ".section-heading, .why-card, .course-card, .stat-card, .detail-card, .contact-card, .registration-form"
 
 );
 
