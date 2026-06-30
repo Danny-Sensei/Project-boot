@@ -1,49 +1,106 @@
-/* ======================================
-   MOBILE NAVIGATION
-====================================== */
-
 const menuBtn = document.querySelector(".menu-btn");
-const navbar = document.querySelector("#navbar");
 
-menuBtn.addEventListener("click", () => {
+const mobileNav = document.querySelector(".mobile-nav");
 
-    navbar.classList.toggle("active");
+const header = document.querySelector(".header");
 
-});
+const navLinks = document.querySelectorAll(".mobile-nav a");
 
+const heroImage = document.querySelector(".hero-image img");
 
-/* ======================================
-   CLOSE MENU WHEN LINK IS CLICKED
-====================================== */
+const scrollTopBtn = document.querySelector(".scroll-top");
 
-const navLinks = document.querySelectorAll("#navbar a");
+/* ==========================================================
+   MOBILE MENU
+========================================================== */
 
-navLinks.forEach(link => {
+if(menuBtn && mobileNav){
 
-    link.addEventListener("click", () => {
+    menuBtn.addEventListener("click",()=>{
 
-        navbar.classList.remove("active");
+        mobileNav.classList.toggle("active");
+
+        menuBtn.classList.toggle("active");
+
+        const icon = menuBtn.querySelector("i");
+
+        if(icon){
+
+            if(mobileNav.classList.contains("active")){
+
+                icon.classList.remove("fa-bars");
+
+                icon.classList.add("fa-xmark");
+
+            }
+
+            else{
+
+                icon.classList.remove("fa-xmark");
+
+                icon.classList.add("fa-bars");
+
+            }
+
+        }
+
+    });
+
+}
+
+/* ==========================================================
+   CLOSE MENU AFTER CLICKING A LINK
+========================================================== */
+
+navLinks.forEach(link=>{
+
+    link.addEventListener("click",()=>{
+
+        mobileNav.classList.remove("active");
+
+        menuBtn.classList.remove("active");
+
+        const icon = menuBtn.querySelector("i");
+
+        if(icon){
+
+            icon.classList.remove("fa-xmark");
+
+            icon.classList.add("fa-bars");
+
+        }
 
     });
 
 });
 
+/* ==========================================================
+   SMOOTH SCROLL
+========================================================== */
 
-/* ======================================
-   SMOOTH SCROLLING
-====================================== */
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-
-    anchor.addEventListener("click", function(e){
+    anchor.addEventListener("click",function(e){
 
         e.preventDefault();
 
-        const target = document.querySelector(this.getAttribute("href"));
+        const target = document.querySelector(
+
+            this.getAttribute("href")
+
+        );
 
         if(target){
 
-            target.scrollIntoView({
+            const headerHeight = header.offsetHeight;
+
+            const targetPosition =
+
+                target.offsetTop - headerHeight;
+
+            window.scrollTo({
+
+                top:targetPosition,
 
                 behavior:"smooth"
 
@@ -55,36 +112,67 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 });
 
+/* ==========================================================
+   STICKY HEADER
+========================================================== */
 
-/* ======================================
-   ACTIVE NAVBAR LINK
-====================================== */
+window.addEventListener("scroll",()=>{
+
+    if(window.scrollY > 40){
+
+        header.classList.add("scrolled");
+
+    }
+
+    else{
+
+        header.classList.remove("scrolled");
+
+    }
+
+});
+
+/* ==========================================================
+   ACTIVE NAVIGATION LINK
+========================================================== */
 
 const sections = document.querySelectorAll("section");
 
-window.addEventListener("scroll", () => {
+window.addEventListener("scroll",()=>{
 
-    let current = "";
+    let currentSection = "";
 
-    sections.forEach(section => {
+    sections.forEach(section=>{
 
-        const sectionTop = section.offsetTop - 120;
+        const sectionTop =
 
-        const sectionHeight = section.clientHeight;
+            section.offsetTop - 180;
 
-        if(scrollY >= sectionTop){
+        const sectionHeight =
 
-            current = section.getAttribute("id");
+            section.offsetHeight;
+
+        if(window.scrollY >= sectionTop){
+
+            currentSection =
+
+                section.getAttribute("id");
 
         }
 
     });
 
-    navLinks.forEach(link => {
+    navLinks.forEach(link=>{
 
         link.classList.remove("active-link");
 
-        if(link.getAttribute("href") === "#" + current){
+        if(
+
+            link.getAttribute("href")
+
+            === "#" + currentSection
+
+        ){
 
             link.classList.add("active-link");
 
@@ -94,101 +182,97 @@ window.addEventListener("scroll", () => {
 
 });
 
+/* ==========================================================
+   SCROLL TO TOP BUTTON
+========================================================== */
 
-/* ======================================
-   HEADER SHADOW ON SCROLL
-====================================== */
+if(scrollTopBtn){
 
-const header = document.querySelector("header");
+    window.addEventListener("scroll",()=>{
 
-window.addEventListener("scroll", () => {
+        if(window.scrollY > 500){
 
-    if(window.scrollY > 50){
+            scrollTopBtn.classList.add("show");
 
-        header.style.boxShadow =
-        "0 4px 15px rgba(0,0,0,.12)";
+        }
 
-    }
+        else{
 
-    else{
+            scrollTopBtn.classList.remove("show");
 
-        header.style.boxShadow = "none";
+        }
 
-    }
+    });
 
-});
+    scrollTopBtn.addEventListener("click",()=>{
 
+        window.scrollTo({
 
-/* ======================================
-   HERO IMAGE PARALLAX
-====================================== */
+            top:0,
 
-const heroImage = document.querySelector(".hero-image img");
+            behavior:"smooth"
 
-document.addEventListener("mousemove", (e)=>{
+        });
 
-    if(heroImage){
+    });
 
-        let x = (window.innerWidth / 2 - e.pageX) / 45;
+}
 
-        let y = (window.innerHeight / 2 - e.pageY) / 45;
+/* ==========================================================
+   HERO IMAGE FLOAT EFFECT
+========================================================== */
+
+if(heroImage){
+
+    document.addEventListener("mousemove",(e)=>{
+
+        const x =
+
+            (window.innerWidth / 2 - e.clientX) / 45;
+
+        const y =
+
+            (window.innerHeight / 2 - e.clientY) / 45;
 
         heroImage.style.transform =
-        `translate(${x}px, ${y}px)`;
 
-    }
-
-});
-
-
-/* ======================================
-   CARD HOVER EFFECT
-====================================== */
-
-const cards = document.querySelectorAll(
-".program-card, .feature, .detail-card"
-);
-
-cards.forEach(card=>{
-
-    card.addEventListener("mouseenter",()=>{
-
-        card.style.transform="translateY(-10px) scale(1.02)";
+            `translate(${x}px, ${y}px)`;
 
     });
 
-    card.addEventListener("mouseleave",()=>{
+}
 
-        card.style.transform="translateY(0px) scale(1)";
+/* ==========================================================
+   RESET SCROLL ON PAGE RELOAD
+========================================================== */
 
-    });
+window.onbeforeunload = function(){
 
-});
+    window.scrollTo(0,0);
 
+};
 
-/* ======================================
+/* ==========================================================
    SCROLL REVEAL ANIMATION
-====================================== */
+========================================================== */
 
 const revealElements = document.querySelectorAll(
 
-".hero-content,.hero-image,.program-card,.feature,.detail-card,.register-box,.contact-grid"
+    ".section-heading, .about-image, .about-content, .why-card, .course-card, .stat-card, .detail-card, .contact-card, .registration-form"
 
 );
 
-function reveal(){
+function revealOnScroll(){
+
+    const trigger = window.innerHeight - 120;
 
     revealElements.forEach(element=>{
 
-        const windowHeight = window.innerHeight;
+        const top = element.getBoundingClientRect().top;
 
-        const revealTop = element.getBoundingClientRect().top;
+        if(top < trigger){
 
-        const revealPoint = 120;
-
-        if(revealTop < windowHeight - revealPoint){
-
-            element.classList.add("show");
+            element.classList.add("active");
 
         }
 
@@ -196,14 +280,75 @@ function reveal(){
 
 }
 
-window.addEventListener("scroll", reveal);
+window.addEventListener("scroll", revealOnScroll);
 
-reveal();
+revealOnScroll();
 
 
-/* ======================================
+/* ==========================================================
+   ANIMATED COUNTERS
+========================================================== */
+
+const counters = document.querySelectorAll(".stat-card h2");
+
+let counterStarted = false;
+
+function runCounters(){
+
+    if(counterStarted) return;
+
+    const statsSection = document.querySelector(".statistics");
+
+    if(!statsSection) return;
+
+    const trigger = statsSection.getBoundingClientRect().top;
+
+    if(trigger < window.innerHeight - 100){
+
+        counterStarted = true;
+
+        counters.forEach(counter=>{
+
+            const originalText = counter.innerText;
+
+            const number = parseInt(originalText.replace(/\D/g,""));
+
+            const suffix = originalText.replace(/[0-9]/g,"");
+
+            let current = 0;
+
+            const increment = Math.max(1, Math.ceil(number / 80));
+
+            const timer = setInterval(()=>{
+
+                current += increment;
+
+                if(current >= number){
+
+                    current = number;
+
+                    clearInterval(timer);
+
+                }
+
+                counter.innerText = current + suffix;
+
+            },20);
+
+        });
+
+    }
+
+}
+
+window.addEventListener("scroll", runCounters);
+
+runCounters();
+
+
+/* ==========================================================
    BUTTON RIPPLE EFFECT
-====================================== */
+========================================================== */
 
 const buttons = document.querySelectorAll("button");
 
@@ -211,7 +356,9 @@ buttons.forEach(button=>{
 
     button.addEventListener("click",function(e){
 
-        const circle = document.createElement("span");
+        const ripple = document.createElement("span");
+
+        ripple.classList.add("ripple");
 
         const diameter = Math.max(
 
@@ -221,41 +368,198 @@ buttons.forEach(button=>{
 
         );
 
-        circle.style.width = circle.style.height =
+        ripple.style.width = diameter + "px";
 
-        `${diameter}px`;
+        ripple.style.height = diameter + "px";
 
-        circle.style.left =
+        ripple.style.left =
 
-        `${e.clientX - this.offsetLeft - diameter/2}px`;
+            e.offsetX - diameter / 2 + "px";
 
-        circle.style.top =
+        ripple.style.top =
 
-        `${e.clientY - this.offsetTop - diameter/2}px`;
+            e.offsetY - diameter / 2 + "px";
 
-        circle.classList.add("ripple");
+        const oldRipple =
 
-        const ripple = this.getElementsByClassName("ripple")[0];
+            this.querySelector(".ripple");
 
-        if(ripple){
+        if(oldRipple){
 
-            ripple.remove();
+            oldRipple.remove();
 
         }
 
-        this.appendChild(circle);
+        this.appendChild(ripple);
 
     });
 
 });
 
 
-/* ======================================
-   SCROLL TO TOP AFTER PAGE RELOAD
-====================================== */
+/* ==========================================================
+   REGISTRATION FORM VALIDATION
+========================================================== */
 
-window.onbeforeunload = function(){
+const form = document.querySelector(".registration-form");
 
-    window.scrollTo(0,0);
+if(form){
 
-};
+    form.addEventListener("submit",function(e){
+
+        e.preventDefault();
+
+        const fullName =
+
+            this.querySelector('input[type="text"]');
+
+        const email =
+
+            this.querySelector('input[type="email"]');
+
+        const selects =
+
+            this.querySelectorAll("select");
+
+        if(
+
+            fullName.value.trim()==="" ||
+
+            email.value.trim()==="" ||
+
+            selects[0].value==="" ||
+
+            selects[1].value===""
+
+        ){
+
+            alert(
+
+                "Please complete all required fields."
+
+            );
+
+            return;
+
+        }
+
+        const emailPattern =
+
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if(!emailPattern.test(email.value)){
+
+            alert(
+
+                "Please enter a valid email address."
+
+            );
+
+            return;
+
+        }
+
+        alert(
+
+            "🎉 Registration submitted successfully!\n\nThank you for registering for Disruptor 3.0."
+
+        );
+
+        this.reset();
+
+    });
+
+}
+
+
+/* ==========================================================
+   PAGE FADE-IN
+========================================================== */
+
+window.addEventListener("load",()=>{
+
+    document.body.style.opacity = "1";
+
+});
+
+
+/* ==========================================================
+   IMAGE HOVER EFFECT
+========================================================== */
+
+const images = document.querySelectorAll(
+
+    ".hero-image img, .about-image img"
+
+);
+
+images.forEach(image=>{
+
+    image.addEventListener("mouseenter",()=>{
+
+        image.style.transform =
+
+            "scale(1.03)";
+
+    });
+
+    image.addEventListener("mouseleave",()=>{
+
+        image.style.transform =
+
+            "scale(1)";
+
+    });
+
+});
+
+
+/* ==========================================================
+   CURRENT YEAR IN FOOTER (Optional)
+========================================================== */
+
+const copyright = document.querySelector(".copyright");
+
+if(copyright){
+
+    const year = new Date().getFullYear();
+
+    copyright.innerHTML =
+
+        `© ${year} Neztrans Digitals. All Rights Reserved.`;
+
+}
+
+
+/* ==========================================================
+   PREVENT EMPTY HASH LINKS
+========================================================== */
+
+document.querySelectorAll('a[href="#"]').forEach(link=>{
+
+    link.addEventListener("click",e=>{
+
+        e.preventDefault();
+
+    });
+
+});
+
+
+/* ==========================================================
+   INITIALIZATION
+========================================================== */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    revealOnScroll();
+
+    runCounters();
+
+    console.log(
+
+        "Disruptor 3.0 Website Loaded Successfully."
+
+    );
+
+});
