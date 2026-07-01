@@ -204,7 +204,7 @@ section{
 
 .logo img{
 
-    width:70px;
+    width:170px;
 
 }
 
@@ -447,7 +447,7 @@ section{
 
     .logo img{
 
-        width:55px;
+        width:145px;
 
     }
 
@@ -472,16 +472,6 @@ section{
         font-size:1.9rem;
 
     }
-
-}
-
-@media(max-width:768px){
-
-.footer-grid{
-
-grid-template-columns:1fr;
-
-}
 
 }
 
@@ -529,7 +519,7 @@ grid-template-columns:1fr;
 
     border-radius:30px;
 
-    font-size:clamp(1.5rem, 5vw, 3rem);
+    font-size:5rem;
 
     font-weight:700;
 
@@ -541,7 +531,7 @@ grid-template-columns:1fr;
 
 .hero-content h3{
 
-   font-size:clamp(1.8rem,5vw,2.8rem);
+    font-size:2.6rem;
 
     line-height:1.2;
 
@@ -557,7 +547,7 @@ grid-template-columns:1fr;
 
     color:var(--primary);
 
-    font-size:clamp(2rem, 5vw, 2.8rem);
+    font-size:2.8rem; 
 
     font-weight:700;
 }
@@ -891,7 +881,7 @@ grid-template-columns:1fr;
     90deg,
     #D4AF37,
     #111111,
-    );
+    )
 }
 
 .course-card:hover{
